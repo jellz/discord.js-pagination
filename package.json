@@ -4,7 +4,7 @@
 	"description": "discord.js-pagination ported to TypeScript with some changes",
 	"main": "./dist/index.js",
 	"typings": "./dist/index.d.ts",
-	"repository": "git@github.com:jellz/discord.js-pagination.git",
+	"repository": "https://github.com/jellz/discord.js-pagination",
 	"author": "Daniel Gulic <danielgulic@gmail.com>",
 	"license": "MIT",
 	"private": false,
