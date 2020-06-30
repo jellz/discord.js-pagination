@@ -41,7 +41,7 @@ export async function editMessageWithPaginatedEmbeds(
 		reaction.users.remove(user);
 		switch (reaction.emoji.name) {
 			case options.emojiList[0]:
-				page = page > 0 ? ++page : pages.length - 1;
+				page = page > 0 ? --page : pages.length - 1;
 				break;
 			case options.emojiList[1]:
 				page = page + 1 < pages.length ? ++page : 0;
