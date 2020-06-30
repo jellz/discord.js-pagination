@@ -5,7 +5,7 @@ const formatFooter = (footer: string, current: number, max: number) =>
 		.replace('{current}', current.toString())
 		.replace('{max}', max.toString());
 
-interface PageOptions {
+export interface PageOptions {
 	emojiList: [string, string];
 	timeout: number;
 	footer: string;
