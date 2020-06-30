@@ -1,9 +1,9 @@
 {
 	"name": "discord.js-pagination-ts",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "discord.js-pagination ported to TypeScript with some changes",
-	"main": "./dist/index.js",
-	"typings": "./dist/index.d.ts",
+	"main": "./dist/index",
+	"typings": "./dist/index",
 	"repository": "git@github.com:jellz/discord.js-pagination.git",
 	"author": "Daniel Gulic <danielgulic@gmail.com>",
 	"license": "MIT",
