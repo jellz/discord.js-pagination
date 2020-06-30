@@ -6,23 +6,23 @@ const formatFooter = (footer: string, current: number, max: number) =>
 		.replace('{max}', max.toString());
 
 interface PageOptions {
-	emojiList?: [string, string];
-	timeout?: number;
-	footer?: string;
-	owner?: User;
+	emojiList: [string, string];
+	timeout: number;
+	footer: string;
+	owner: User | null;
 }
 
 export async function editMessageWithPaginatedEmbeds(
 	message: Message,
 	pages: MessageEmbed[],
-	options: PageOptions = {
-		emojiList: ['⏪', '⏩'],
-		timeout: 120000,
-		footer: 'Showing page {current} of {max}',
-	}
+	{ emojiList, footer, owner, timeout }: Partial<PageOptions>
 ) {
-	if (!message.channel) throw new Error('Cannot access message channel');
-
+	const options: PageOptions = {
+		emojiList: emojiList ?? ['⏪', '⏩'],
+		timeout: timeout ?? 120000,
+		footer: footer ?? 'Showing page {current} of {max}',
+		owner: owner || null,
+	};
 	let page = 0;
 
 	const currentPage = await message.edit(
