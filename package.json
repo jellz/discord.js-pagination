@@ -10,8 +10,5 @@
 	"dependencies": {
 		"discord.js": "^12.2.0"
 	},
-	"scripts": {
-		"prepublish": "tsc"
-	},
 	"types": "dist/index.d.ts"
 }
