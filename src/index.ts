@@ -10,24 +10,29 @@ export interface PageOptions {
 	timeout: number;
 	footer: string;
 	owner: User | null;
+	keepContent?: boolean;
 }
 
 export async function editMessageWithPaginatedEmbeds(
 	message: Message,
 	pages: MessageEmbed[],
-	{ emojiList, footer, owner, timeout }: Partial<PageOptions>
+	{ emojiList, footer, owner, timeout, keepContent }: Partial<PageOptions>
 ) {
 	const options: PageOptions = {
 		emojiList: emojiList ?? ['⏪', '⏩'],
 		timeout: timeout ?? 120000,
 		footer: footer ?? 'Showing page {current} of {max}',
 		owner: owner || null,
+		keepContent: keepContent,
 	};
 	let page = 0;
 
-	const currentPage = await message.edit(
-		pages[page].setFooter(formatFooter(options.footer, page + 1, pages.length))
-	);
+	const currentPage = await message.edit({
+		content: keepContent ? message.content : null,
+		embed: pages[page].setFooter(
+			formatFooter(options.footer, page + 1, pages.length)
+		),
+	});
 
 	if (pages.length > 1) {
 		for (const emoji of options.emojiList) await currentPage.react(emoji);
@@ -50,11 +55,12 @@ export async function editMessageWithPaginatedEmbeds(
 				default:
 					break;
 			}
-			currentPage.edit(
-				pages[page].setFooter(
+			currentPage.edit({
+				content: keepContent ? message.content : null,
+				embed: pages[page].setFooter(
 					formatFooter(options.footer, page + 1, pages.length)
-				)
-			);
+				),
+			});
 		});
 
 		reactionCollector.on('end', () => currentPage.reactions.removeAll());
