@@ -1,6 +1,6 @@
 {
 	"name": "discord.js-pagination-ts",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"description": "discord.js-pagination ported to TypeScript with some changes",
 	"main": "./dist/index.js",
 	"typings": "./dist/index.d.ts",
