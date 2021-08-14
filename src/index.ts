@@ -29,20 +29,22 @@ export async function editMessageWithPaginatedEmbeds(
 
 	const currentPage = await message.edit({
 		content: keepContent ? message.content : null,
-		embed: pages[page].setFooter(
-			formatFooter(options.footer, page + 1, pages.length)
-		),
+		embeds: [
+			pages[page].setFooter(
+				formatFooter(options.footer, page + 1, pages.length)
+			),
+		],
 	});
 
 	if (pages.length > 1) {
 		for (const emoji of options.emojiList) await currentPage.react(emoji);
-		const reactionCollector = currentPage.createReactionCollector(
-			(reaction, user) =>
-				options.emojiList.includes(reaction.emoji.name) &&
+		const reactionCollector = currentPage.createReactionCollector({
+			filter: (reaction, user) =>
+				options.emojiList.includes(reaction.emoji.name!) &&
 				!user.bot &&
 				(options.owner ? options.owner.id === user.id : true),
-			{ time: options.timeout }
-		);
+			time: options.timeout,
+		});
 		reactionCollector.on('collect', (reaction, user) => {
 			reaction.users.remove(user);
 			switch (reaction.emoji.name) {
@@ -57,9 +59,11 @@ export async function editMessageWithPaginatedEmbeds(
 			}
 			currentPage.edit({
 				content: keepContent ? message.content : null,
-				embed: pages[page].setFooter(
-					formatFooter(options.footer, page + 1, pages.length)
-				),
+				embeds: [
+					pages[page].setFooter(
+						formatFooter(options.footer, page + 1, pages.length)
+					),
+				],
 			});
 		});
 

@@ -1,6 +1,6 @@
 {
 	"name": "discord.js-pagination-ts",
-	"version": "1.0.13",
+	"version": "1.0.14",
 	"description": "discord.js-pagination ported to TypeScript with some changes",
 	"main": "./dist/index.js",
 	"typings": "./dist/index.d.ts",
@@ -9,7 +9,7 @@
 	"license": "MIT",
 	"private": false,
 	"dependencies": {
-		"discord.js": "^12.2.0"
+		"discord.js": "^13.1.0"
 	},
 	"scripts": {
 		"prepublish": "tsc"
